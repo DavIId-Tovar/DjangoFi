@@ -1,0 +1,28 @@
+# --- Python ---
+# El entorno virtual: se regenera con requirements.txt
+.venv/
+# Archivos .pyc que Python compila solo para ir más rápido
+__pycache__/
+*.pyc
+
+# --- Django ---
+# Base de datos local de pruebas
+Backend/db.sqlite3
+# Estáticos recolectados con collectstatic (se generan en Render)
+Backend/staticfiles/
+
+# --- Secretos datos Sensibles (NUNCA se suben) ---
+.env
+
+# --- React / Node ---
+# Miles de archivos que npm reinstala solo
+frontend/node_modules/
+# El build: Render lo genera al desplegar
+frontend/dist/
+
+# --- Editor / sistema ---
+.vscode/
+.DS_Store
+
+# --- Configuración local de herramientas ---
+.claude/

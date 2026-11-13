@@ -1,0 +1,32 @@
+# Blueprint de Render: describe la infraestructura como código.
+# Render lee este archivo y crea la base de datos y el servicio web.
+databases:
+  - name: sismos-db
+    plan: free
+    databaseName: sismos
+    user: sismos
+
+services:
+  - type: web
+    name: sismos-obs
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    # --chdir Backend: gunicorn se ubica en Backend/ y entra por config/wsgi.py;
+    # 2 procesos (workers) atienden en paralelo
+    startCommand: gunicorn --chdir Backend config.wsgi:application --workers 2 --timeout 120
+    envVars:
+      - key: DATABASE_URL          # Render la llena con la URL de PostgreSQL
+        fromDatabase:
+          name: sismos-db
+          property: connectionString
+      - key: SECRET_KEY            # Render genera una clave aleatoria segura
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SUPERUSER_USERNAME   # sync:false -> Render te las pide al crear
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false

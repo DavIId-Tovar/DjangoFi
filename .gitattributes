@@ -1,0 +1,2 @@
+# Los scripts de shell SIEMPRE con fin de línea Linux (LF), aunque se editen en Windows
+*.sh text eol=lf

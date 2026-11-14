@@ -7,8 +7,8 @@
 set -o errexit
 
 echo "==> 1. Dependencias de Python"
-pip install --upgrade pip
-pip install -r Backend/requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r Backend/requirements.txt
 
 echo "==> 2. Compilar React (frontend/dist)"
 if ! command -v npm > /dev/null; then
